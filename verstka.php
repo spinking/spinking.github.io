@@ -135,17 +135,10 @@
 				<div class="destination-form">
 					<div class="destination-form-hat">List of destination<hr></div>
 					<form class="sort-destination" method="post">
-						<?php
+						<label for="select">sort by :<?php
 							include 'select.php';
-						?>
-						<!-- <label for="select">sort by :
-								<select class="destination-select" name="cat">
-								<option value="1"></option>
-								<option value="2"></option>
-								<option value="3"></option>
-								<option value="4"></option>
-							</select>
-						</label> -->
+							?>
+						</label>
 						<div></div>
 					</form>
 					<div class="destination-form-content">
