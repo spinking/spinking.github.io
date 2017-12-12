@@ -7,7 +7,7 @@ table {
 	height: 300px;
 	position: relative;
 	border:1px solid white;
-	margin:200px auto 0 auto;
+	margin:100px auto 0 auto;
 	border-collapse: collapse;
 	color:white;
 }
@@ -31,4 +31,36 @@ p {
 	position: relative;
 	color: white;
 	text-align: center;
+}
+
+form {
+	margin: auto;
+	text-align: center;
+	margin-top: 60px;
+}
+
+.button {
+	background: black;
+	width: 100px;
+	height: 40px;
+	border:1px solid white;
+	margin:auto;
+	text-align: center;
+	color:white;
+	vertical-align: middle;
+	line-height: 40px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+}
+
+.button:hover {
+	background: #3a0d0f;
+	transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
 }
