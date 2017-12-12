@@ -5,47 +5,58 @@ var view = {
 		var messageArea = document.getElementById("messageArea");
 		messageArea.innerHTML = msg;
 	},
-	displayChar: function(guess) {
+	displayChar: function(guess, symbol) {
 		var charLocation = document.getElementById(guess);
-		charLocation.innerHTML = model.twoVariant();
+		charLocation.innerHTML = symbol;
 	}
 }
 
 // Модель
 
 var model = {
+	counter: 0,
 	cells: {
-		locations: ["00", "01", "02", "10", "11", "12", "20", "21", "22"],
+		locations: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
 		hits: ["", "", "", "", "", "", "", "", ""]
 	},
 
+// Функция возвращает х или о в зависимости от того, четный или нечетный клик.
+
 	twoVariant: function() {
-		check = this.cells.hits;
+				this.counter++;
+				console.log(this.counter);
 				if (controller.guesses % 2 === 0) {
 					view.displayMessage("X turn");
 					return "o";
-				} else { 
+				} else {
 					view.displayMessage("O turn");
 					return "x";
 				}
 	},
 
+/*метод принимает id клика, сверяет его с массивом значений, если по указанному id
+ нет еще значения присваивает ему результат функии twoVariant.
+ дальше инициализирует метод представления, отвечающий за вывод результата функии twoVariant на экран.
+ дальше инициализирует метод, отслеживающий победные варианты.*/
+
 	getHit: function(guess) {
 		var loc = this.cells.locations;
 		var check = this.cells.hits;
-		for (var i =0; i < loc.length; i++ ) {
+		for (var i = 0; i < loc.length; i++ ) {
 			var index = loc.indexOf(guess);
 			if (index >= 0 && check[index] == "") {
 				check[index] = this.twoVariant();
-					view.displayChar(guess);
+					view.displayChar(guess, check[index]);
 					this.collisions();
 					
-					console.log(guess);
-					console.log(this.cells.hits);
+					/*console.log(guess);
+					console.log(this.cells.hits);*/
 			} 
 		}
 
 	},
+
+/*метод отслеживает победные варианты.*/
 
 	collisions: function() {
 		check = this.cells.hits;
@@ -74,7 +85,7 @@ var model = {
 			) {
 			view.displayMessage("O win the game!");
 			this.cells.hits = ["g", "g", "g", "g", "g", "g", "g", "g", "g"];
-		} else if (controller.guesses >= 9) {
+		} else if (this.counter >= 9) {
 			view.displayMessage("End this Game!");
 		}
 	}
@@ -85,10 +96,12 @@ var model = {
 var controller = {
 	guesses: 0,
 
+// метод считает количество кликов и обращается к модели.
+
 	processGuess: function(guess) {
 		if (guess) {
-		this.guesses = this.guesses + 1;
-		var hit = model.getHit(guess);
+		this.guesses++;
+		model.getHit(guess);
 		}
 	}
 };
@@ -100,8 +113,11 @@ function init() {
 	for (var i = 0; clicker.length; i++) {
 		clicker[i].addEventListener("click", value, false);
 	}
-	function value(clickID) {
-	var guess = clickID.target.id;
+
+// Функция получает элемент таблицы, и передает его id в контроллер.
+
+	function value(thisClick) {
+	var guess = thisClick.target.id;
 	controller.processGuess(guess);
 	}
 }
