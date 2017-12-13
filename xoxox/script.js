@@ -24,7 +24,7 @@ var model = {
 
 	twoVariant: function() {
 				this.counter++;
-				console.log(this.counter);
+				/*console.log(this.counter);*/
 				if (controller.guesses % 2 === 0) {
 					view.displayMessage("X turn");
 					return "o";
@@ -99,10 +99,9 @@ var controller = {
 // метод считает количество кликов и обращается к модели.
 
 	processGuess: function(guess) {
-		if (guess) {
 		this.guesses++;
 		model.getHit(guess);
-		}
+
 	}
 };
 
