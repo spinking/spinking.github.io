@@ -23,15 +23,14 @@ var model = {
 // Функция возвращает х или о в зависимости от того, четный или нечетный клик.
 
 	twoVariant: function() {
-				this.counter++;
-				/*console.log(this.counter);*/
-				if (controller.guesses % 2 === 0) {
-					view.displayMessage("X turn");
-					return "o";
-				} else {
-					view.displayMessage("O turn");
-					return "x";
-				}
+		this.counter++;
+		if (controller.guesses % 2 === 0) {
+			view.displayMessage("X turn");
+			return "o";
+		} else {
+			view.displayMessage("O turn");
+			return "x";
+		}
 	},
 
 /*метод принимает id клика, сверяет его с массивом значений, если по указанному id
@@ -45,15 +44,39 @@ var model = {
 		for (var i = 0; i < loc.length; i++ ) {
 			var index = loc.indexOf(guess);
 			if (index >= 0 && check[index] == "") {
-				check[index] = this.twoVariant();
+				if (controller.radio) {
+					check[index] = this.twoVariant();
 					view.displayChar(guess, check[index]);
 					this.collisions();
-					
-					/*console.log(guess);
-					console.log(this.cells.hits);*/
-			} 
+				} else {
+					check[index] = "x";
+					view.displayMessage("Your turn!");
+					this.counter++;
+					view.displayChar(guess, check[index]);
+					this.collisions();
+					view.displayChar(this.iiRound(), "o");
+					this.collisions();
+				}
+			}
 		}
+	},
 
+/*Метод случайно ставит "o"*/
+
+	iiRound: function() {
+		var test = this.cells.hits;
+		var rand = Math.floor(Math.random() * 9);
+		if (this.counter < 8) {
+			if (test[rand] === "x" || test[rand] === "o") {
+				return this.iiRound();
+			} else if (test[rand] === "g") {
+				return false;
+			} else {
+				test[rand] = "o";
+				this.counter++;
+				return rand;
+			}
+		}
 	},
 
 /*метод отслеживает победные варианты.*/
@@ -86,7 +109,7 @@ var model = {
 			view.displayMessage("O win the game!");
 			this.cells.hits = ["g", "g", "g", "g", "g", "g", "g", "g", "g"];
 		} else if (this.counter >= 9) {
-			view.displayMessage("End this Game!");
+			view.displayMessage("Chinpokomon win this EPIC GAME!");
 		}
 	}
 }
@@ -95,19 +118,23 @@ var model = {
 
 var controller = {
 	guesses: 0,
+	radio: false,
 
 // метод считает количество кликов и обращается к модели.
 
 	processGuess: function(guess) {
 		this.guesses++;
 		model.getHit(guess);
-
 	}
 };
 
 // Обработчик событий
 
 function init() {
+	var radioButton = document.getElementById("onIi");
+	var radioButton2 = document.getElementById("offIi");
+	radioButton.onchange = handler;
+	radioButton2.onchange = bandler;
 	var clicker = document.getElementsByTagName("td");
 	for (var i = 0; clicker.length; i++) {
 		clicker[i].addEventListener("click", value, false);
@@ -118,6 +145,12 @@ function init() {
 	function value(thisClick) {
 	var guess = thisClick.target.id;
 	controller.processGuess(guess);
+	}
+	function handler() {
+		controller.radio = false;
+	}
+	function bandler() {
+		controller.radio = true;
 	}
 }
 
