@@ -220,8 +220,11 @@ function PageLoad() {
 /*Reset Button*/
 
 $('#resetButton').on('click', function() {
+	$("td").fadeOut(400, function() {
+		$("td").empty();
+		$("td").removeAttr("style");
+	});
 	model.cells.hits = ["", "", "", "", "", "", "", "", ""];
 	model.counter = 0;
 	$('#messageArea').text('Welcome!');
-	$("td").empty();
 })
