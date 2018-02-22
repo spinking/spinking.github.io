@@ -225,6 +225,3 @@ $('#resetButton').on('click', function() {
 	$('#messageArea').text('Welcome!');
 	$("td").empty();
 })
-
-/*Grid*/
-
