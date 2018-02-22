@@ -13,7 +13,10 @@ body {
 #game {
 	width:100%;
 	max-width:300px;
-	margin:auto;
+	margin:40px auto;
+	opacity: 0;
+	transform: translate3d(0px 20px 0px);
+	-webkit-transform: translate3d(0px 20px 0px);
 }
 
 table {
@@ -21,14 +24,12 @@ table {
 	height:300px;
 	max-width:300px;
 	position:relative;
-	border:1px solid white;
 	margin:40px auto 0 auto;
 	border-collapse:collapse;
 	color:white;
 }
 
 td {
-	border:1px solid white;
 	width:33%;
 	height:33%;
 	text-align:center;
@@ -36,10 +37,6 @@ td {
 	padding:0px;
 	cursor:pointer;
 	-webkit-user-select:none;
-}
-
-tr {
-	border:1px solid white;
 }
 
 p {
@@ -91,5 +88,37 @@ p {
 
 #messageArea {
 	text-align:center;
-	margin-top:40px;
+	margin-top:60px;
+	opacity: 0;
+	transform: translate3d(0px 20px 0px);
+	-webkit-transform: translate3d(0px 20px 0px);
+}
+
+.counter {
+	width: 100%;
+	height: 100px;
+	
+}
+
+#text-counter {
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	font-size: 100px;
+	background-color: #3a0d0f;
+}
+
+body.hidden {
+	opacity: 0;
+}
+
+svg {
+	margin:40px auto 0 auto;
+	position: absolute;
+}
+
+#grid {
+	opacity: 0;
+	min-width: 300px;
+	min-height: 300px;
 }

@@ -7,11 +7,12 @@
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
 </head>
-<body>
+<body class="hidden">
+	<p id="messageArea">Welcome!</p>
 	<div id="game">
-		<p id="messageArea">Welcome!</p>
 		<form>
-			<div class="button" id="resetButton" onclick="window.location.reload();">
+			<!-- onclick="window.location.reload();" -->
+			<div class="button" id="resetButton">
 				RESET
 			</div>
 			<p><input type="radio" name="onIi" checked id="onIi"> one Player</p>
@@ -33,8 +34,52 @@
 				<td id="7"></td>
 				<td id="8"></td>
 			</tr>
+
+
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewBox="0 0 300 300" version="1.1">
+				<g id="Canvas" transform="translate(157 257)">
+			    	<clipPath id="clip-0" clip-rule="evenodd">
+			   			<path d="M-157-257L143-257 143 43 -157 43 -157-257Z" fill="#FFFFFF"/>
+			    	</clipPath>
+	    			<g id="grid" clip-path="url(#clip-0)">
+			    		<g id="right-line">
+			        		<use xlink:href="#path0_stroke" transform="matrix(6.12323e-17 1 -1 6.12323e-17 142 -256)" fill="#FFFFFF"/>
+			    		</g>
+					    <g id="third-vertical-line">
+					        <use xlink:href="#path0_stroke" transform="matrix(6.12323e-17 1 -1 6.12323e-17 43 -256)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="second-vertical-line">
+					        <use xlink:href="#path0_stroke" transform="matrix(6.12323e-17 1 -1 6.12323e-17 -57 -256)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="left-line">
+					        <use xlink:href="#path0_stroke" transform="matrix(6.12323e-17 1 -1 6.12323e-17 -157 -256)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="bottom-line">
+					        <use xlink:href="#path0_stroke" transform="translate(-157 43)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="third-horizont-line">
+					        <use xlink:href="#path0_stroke" transform="translate(-157 -57)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="second-horizont-line">
+					        <use xlink:href="#path0_stroke" transform="translate(-157 -157)" fill="#FFFFFF"/>
+					    </g>
+					    <g id="top-line">
+					        <use xlink:href="#path0_stroke" transform="translate(-157 -256)" fill="#FFFFFF"/>
+					    </g>
+					</g>
+				</g>
+				<defs>
+					<path id="path0_stroke" d="M0 0L300 0 300-1 0-1 0 0Z"/>
+				</defs>
+			</svg>
+
 		</table>
 	</div>
-<script src="script.js"></script>
+	
+	<div class="counter" id="text-counter"></div>
+
+<script src="jquery.min.js"></script>
+<script src="plugins.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>
