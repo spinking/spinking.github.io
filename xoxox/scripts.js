@@ -228,3 +228,36 @@ $('#resetButton').on('click', function() {
 	model.counter = 0;
 	$('#messageArea').text('Welcome!');
 })
+
+/*Reset Button Parallax Effect*/
+
+$('.button-wrapper').mouseleave(function(e) {
+	TweenMax.to(this,0.3, {scale: 1});
+	TweenMax.to('.button, #button-text', 0.3, {scale:1, x: 0, y: 0});
+	TweenMax.to('.button', 0.3, {backgroundColor:'#000'});
+});
+$('.button-wrapper').mouseenter(function(e) {
+	TweenMax.to(this,0.3, {transformOrigin: '0 0', scale:1});
+	TweenMax.to('.button', 0.3, {scale:1.5});
+	TweenMax.to('.button', 0.3, {backgroundColor:'#3a0d0f'});
+});
+$('.button-wrapper').mousemove(function(e) {
+	callParallax(e);
+});
+function callParallax(e) {
+	parallaxIt(e, '.button', 80);
+	parallaxIt(e, '#button-text', 20);
+}
+function parallaxIt(e,target,movement) {
+	var $this = $('.button-wrapper');
+	var boundingRect = $this[0].getBoundingClientRect();
+	var relX = e.pageX - boundingRect.left;
+	var relY = e.pageY - boundingRect.top;
+	var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+	TweenMax.to(target, 0.3, {
+		x:(relX - boundingRect.width/2) / boundingRect.width * movement,
+		y:(relY - boundingRect.height/2 - scrollTop) / boundingRect.width * movement,
+		ease:Power2.easeOut
+	});
+}
